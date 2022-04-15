@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cron-example
+  namespace: cronjob
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cron-example
+            image: alpine
+            args:
+            - /bin/sh
+            - -c
+            - date;echo Hello there
+          restartPolicy: OnFailure
